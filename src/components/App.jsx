@@ -1,17 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import '../css/App.css';
-import Header from "./Header.jsx";
-import Footer from "./Footer.jsx";
+import Home from "./Home";
 
 class App extends Component {
   render() {
     return (
-      <Fragment>
-        <Header />
-          
-        <Footer />
-      </Fragment>
-    );
+      <Home />
+    )
   }
 }
 
