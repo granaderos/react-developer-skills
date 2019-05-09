@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react"
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import SkillAssessment from "./SkillAssessment";
 import Developers from "./Developers";
@@ -11,11 +11,33 @@ class Home extends Component {
         return(
             <Router>
                 <Fragment>
-                    <Route path="/" exact component={Dashboard} />
-                    <Route path="/skill-assessments" exact component={SkillAssessment} />
-                    <Route path="/developers" exact component={Developers} />
-                    <Route path="/skills" exact component={Skills} />
-                    <Route path="/skills-capability-report" exact component={SkillCapabilityReport} /> 
+                    <Route 
+                        path="/" 
+                        exact component={Dashboard} 
+                    />
+
+                    <Route 
+                        path="/skill-assessments" 
+                        exact component={SkillAssessment} 
+                        listDevelopers={this.props.listDevelopers} 
+                    />
+
+                    <Route 
+                        path="/developers" 
+                        exact component={Developers}
+                        listDevelopers={this.props.listDevelopers}
+                    />
+
+                    <Route 
+                        path="/skills" 
+                        exact component={Skills} 
+                    />
+
+                    <Route 
+                        path="/skills-capability-report" 
+                        exact component={SkillCapabilityReport} 
+                    />
+                     
                 </Fragment>
             </Router> 
         )

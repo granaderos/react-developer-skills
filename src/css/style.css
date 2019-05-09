@@ -9,3 +9,36 @@ footer {
     padding: 20px;
     background-color: ghostwhite;
 }
+
+#divDashboardContainer {
+    height: 420px;
+    padding: 20px;
+    border: 1px solid gray;
+    text-align: center;
+    
+}
+
+.active {
+    font-weight: bold;
+}
+
+nav > ul > li > a {
+    text-decoration: none !important;
+    padding: 10px;
+    /* font-weight: bold; */
+}
+
+.noBullet {
+    list-style-type: none !important;
+}
+
+#divAddSkill, #divAddSkillAssessment {
+    padding: 20px;
+    border: 1px solid whitesmoke;
+    margin: 20px;
+}
+/* 
+#tableDevs thead tr th, #tableDevs tbody tr td {
+    text-align: center;
+    vertical-align: center;
+} */

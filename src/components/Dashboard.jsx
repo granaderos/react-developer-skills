@@ -6,8 +6,9 @@ export default class Dashboard extends Component {
         return(
             <Fragment>
                 <Header location={this.props.location} />
-                    <div>
-                        <h2>Put something on this dashboard.</h2>
+                    <div id="divDashboardContainer">
+                        <h2>Developer Skills System Dashboard.</h2>
+                        <h2>Put something here.</h2>
                     </div>
                 <Footer />
             </Fragment>
