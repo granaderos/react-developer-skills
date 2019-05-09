@@ -55,6 +55,8 @@ export default class SkillAssessment extends Component {
         this.getListLevels();
 
         $("#btnCancelUpdate").hide();
+        $("#formSearchDev").hide();
+        $("#divAddSkillAssessment").hide();
 
     }
 
@@ -238,11 +240,41 @@ export default class SkillAssessment extends Component {
         }
     }
 
+    handleShowFilterDevelopers = () => {
+        if($("#btnShowFilterDevelopers").html() == "Hide Filter Options") {
+            $("#btnShowFilterDevelopers").html("Filter Developer List");
+            $("#formSearchDev").hide("slow");
+        } else {
+            $("#btnShowFilterDevelopers").html("Hide Filter Options");
+            $("#formSearchDev").show("slow");
+        }
+        
+    }
+
+    handleShowAddSkillAssessment = () => {
+        if($("#btnShowAddSkillAssessmentForm").html() == "Add a Skill Assessment") {
+
+            $("#divAddSkillAssessment").show();
+            $("#btnShowAddSkillAssessmentForm").html("Hide Skill Assessment Form");
+
+        } else {
+            $("#btnShowAddSkillAssessmentForm").html("Add a Skill Assessment");
+            $("#divAddSkillAssessment").hide();
+        }
+    }
+
     render() {
         return (
             <Fragment>
                 <Header location={this.props.location} />
                 <div className="container container-fluid">
+                    <br />
+                    <div className="float-right">
+                        <button className="btn btn-info" id="btnShowFilterDevelopers" onClick={this.handleShowFilterDevelopers}>Filter Developer List</button>
+                        &nbsp;&nbsp;
+                        <button className="btn btn-primary" id="btnShowAddSkillAssessmentForm" onClick={this.handleShowAddSkillAssessment}>Add a Skill Assessment</button>
+                    </div>
+                    <br />
                     <div id="divAddSkillAssessment">
                         <h3 id="h3SkillAssessment">Add a Skill Assessment</h3>
                         <form id="formSkillAssessment" method="POST" onSubmit={this.handleAddSkillAssessmentFormSubmit}>
@@ -306,8 +338,9 @@ export default class SkillAssessment extends Component {
 
                         </form>
                     </div>
+                    
                     <br />
-                    <h3>List of Developers</h3>
+                    <h3>Skill Assessments</h3>
                     <table id="tableDevs" className="table table-hover">
                         <thead>
                             <tr>

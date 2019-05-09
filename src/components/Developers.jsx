@@ -45,6 +45,8 @@ export default class Developers extends Component {
     componentDidMount() {
         this.getListDevelopers();
         this.formValidations();
+
+        $("#formSearchDev").hide();
     }
     
     // axios API requests
@@ -106,7 +108,6 @@ export default class Developers extends Component {
 
     handleCloseAddDevModal = () => {
         this.setState({show: false});
-
     }
 
     handleAddDevBtnClick = () => {
@@ -124,6 +125,8 @@ export default class Developers extends Component {
                 if(res.data == "New developer has been successfully added.") {
                     this.setState({show: false});
                     this.getListDevelopers();
+                } else {
+                    alert("")
                 }
                 
             })
@@ -139,6 +142,17 @@ export default class Developers extends Component {
             }
         }));
         console.log("dev = " + JSON.stringify(this.state.dev));
+    }
+
+    handleShowFilterDevelopers = () => {
+        if($("#btnShowFilterDevelopers").html() == "Hide Filter Options") {
+            $("#btnShowFilterDevelopers").html("Filter Developer List");
+            $("#formSearchDev").hide("slow");
+        } else {
+            $("#btnShowFilterDevelopers").html("Hide Filter Options");
+            $("#formSearchDev").show("slow");
+        }
+        
     }
 
     formValidations = () => {
@@ -249,50 +263,54 @@ export default class Developers extends Component {
             <Fragment>
                 <Header location={this.props.location} />
                 <div className="container container-fluid">
-                <Modal show={this.state.show} onHide={this.handleCloseAddDevModal}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Developer Form</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <form id="formDeveloper" method="POST" onSubmit={this.handleAddDevFormSubmit}>
-                            <div>
-                                <label for="firstName">First Name:</label>
-                                <input onChange={this.handleChangeDevData} type="text" className="form-control" name="firstName" id="firstName" required />
-                            </div>
-                            <div>
-                                <label for="middleName">Middle Name:</label>
-                                <input onChange={this.handleChangeDevData} type="text" className="form-control" name="middleName" id="middleName" />
-                            </div>
-                            <div>
-                                <label>Last Name:</label>
-                                <input onChange={this.handleChangeDevData} type="text" className="form-control" name="lastName" id="lastName" />
-                            </div>
-                            <div>
-                                <label>Birth Date:</label>
-                                <input onChange={this.handleChangeDevData} type="text" className="form-control" name="birthDate" id="birthDate" />
-                            </div>
-                            <div>
-                                <label>Position:</label>
-                                <input onChange={this.handleChangeDevData} type="text" className="form-control" name="position" id="position" />
-                            </div>
-                        </form>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="primary" onClick={this.handleAddDevFormSubmit}>
-                            Submit
-                        </Button>
-                        <Button variant="secondary" onClick={this.handleCloseAddDevModal}>
-                            Cancel
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
+                    <Modal show={this.state.show} onHide={this.handleCloseAddDevModal}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Developer Form</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <form id="formDeveloper" method="POST" onSubmit={this.handleAddDevFormSubmit}>
+                                <div>
+                                    <label for="firstName">First Name:</label>
+                                    <input onChange={this.handleChangeDevData} type="text" className="form-control" name="firstName" id="firstName" required />
+                                </div>
+                                <div>
+                                    <label for="middleName">Middle Name:</label>
+                                    <input onChange={this.handleChangeDevData} type="text" className="form-control" name="middleName" id="middleName" />
+                                </div>
+                                <div>
+                                    <label>Last Name:</label>
+                                    <input onChange={this.handleChangeDevData} type="text" className="form-control" name="lastName" id="lastName" />
+                                </div>
+                                <div>
+                                    <label>Birth Date:</label>
+                                    <input onChange={this.handleChangeDevData} type="text" className="form-control" name="birthDate" id="birthDate" />
+                                </div>
+                                <div>
+                                    <label>Position:</label>
+                                    <input onChange={this.handleChangeDevData} type="text" className="form-control" name="position" id="position" />
+                                </div>
+                            </form>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="primary" onClick={this.handleAddDevFormSubmit}>
+                                Submit
+                            </Button>
+                            <Button variant="secondary" onClick={this.handleCloseAddDevModal}>
+                                Cancel
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
 
                     <br />
-                    <button className="pull-right btn btn-lg btn-primary" onClick={this.handleShowAddDevModal}>Add a Developer</button>
+                    <div className="float-right">
+                        <button className="btn btn-info" id="btnShowFilterDevelopers" onClick={this.handleShowFilterDevelopers}>Filter Developer List</button>
+                        &nbsp;&nbsp;
+                        <button className="btn btn-primary" onClick={this.handleShowAddDevModal}>Add a Developer</button>
+                    </div>
                     {/* Dev table and search form */}
                     <form method="GET" id="formSearchDev" onSubmit={this.handleFilterDevFormSubmit}>
                         <fieldset>
-                            <legend>Filter Developers:</legend>
+                            <legend>Filter Options:</legend>
                             <small>First Name:</small> <input type="text" className="form-control-sm form-control" name="sFirstName" id="sFirstName" />
                             <small>Last Name:</small> <input type="text" className="form-control-sm form-control" name="sLastName" id="sLastName" />
                             <small>Skill:</small> <input type="text" className="form-control-sm form-control" name="sSkill" id="sSkill" />
@@ -300,11 +318,12 @@ export default class Developers extends Component {
                             <small>Months of Experience:</small> <input type="text" className="form-control-sm form-control" name="sMonthsOfExperience" id="sMonthsOfExperience" /> */}
                         </fieldset>
                         <br />
-                        <input type="submit" className="btn btn-primary" value="Search" />&nbsp;&nbsp;
-                        <input type="reset" className="btn btn-warning" value="Reset Form" />&nbsp;&nbsp;
+                        <input type="submit" className="btn btn-sm btn-primary" value="Search Filter" />&nbsp;&nbsp;
+                        <input type="reset" className="btn btn-sm btn-warning" value="Reset Form" />&nbsp;&nbsp;
 
                     </form>
                     <br />
+                    <h3>List of Developers</h3>
                     <table id="tableDevs" className="table table-hover">
                         <thead>
                             <tr>
