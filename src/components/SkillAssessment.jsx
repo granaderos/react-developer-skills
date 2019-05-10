@@ -180,7 +180,7 @@ export default class SkillAssessment extends Component {
         $("#monthsOfExperience").val(monthsOfExperience);
 
         this.setState({action: "update"});
-
+        $("#btnShowAddSkillAssessmentForm").click();
         window.location.href = "#divAddSkillAssessment";
         $("#developerId").focus();
         $("#h3SkillAssessment").html("Update Skill Assessment");
@@ -324,7 +324,7 @@ export default class SkillAssessment extends Component {
                     <div id="divFilterSkillAssessmentContainer">
                         <form method="GET" id="formSearchDev" onSubmit={this.handleFilterDevFormSubmit}>
                             <fieldset>
-                                <legend>Filter Developers:</legend>
+                                <legend>Filter Options:</legend>
                                 <small>First Name:</small> <input type="text" className="form-control-sm form-control" name="sFirstName" id="sFirstName" />
                                 <small>Last Name:</small> <input type="text" className="form-control-sm form-control" name="sLastName" id="sLastName" />
                                 <small>Skill:</small> <input type="text" className="form-control-sm form-control" name="sSkill" id="sSkill" />
@@ -334,7 +334,7 @@ export default class SkillAssessment extends Component {
                             <br />
                             <input type="submit" className="btn btn-sm btn-primary" value="Search Filter" />&nbsp;&nbsp;
                             <input type="reset" className="btn btn-sm btn-warning" value="Reset Form" />&nbsp;&nbsp;
-                            <input type="button" onClick={this.getListDevelopers} className="btn btn-sm btn-danger" value="Cancel Filter" />
+                            <input type="button" onClick={this.getListDevelopers} className="btn btn-sm btn-danger" value="Clear Filter" />
 
                         </form>
                     </div>

@@ -5,6 +5,8 @@ import SkillAssessment from "./SkillAssessment";
 import Developers from "./Developers";
 import Skills from "./Skills";
 import SkillCapabilityReport from "./SkillCapabilityReport";
+import Login from "./Login"
+import UserStories from "./UserStories"
 
 class Home extends Component {
     render() {
@@ -36,6 +38,16 @@ class Home extends Component {
                     <Route 
                         path="/skills-capability-report" 
                         exact component={SkillCapabilityReport} 
+                    />
+
+                    <Route 
+                        path="/login" 
+                        exact component={Login} 
+                    />
+
+                    <Route 
+                        path="/user-stories" 
+                        exact component={UserStories} 
                     />
                      
                 </Fragment>

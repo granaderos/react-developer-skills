@@ -34,7 +34,12 @@ class Navigation extends Component {
                             <i></i>&nbsp;&nbsp;Skill Capability Report
                         </Link>
                     </li>
+
+                    
                 </ul>
+                {/* <span className="float-right">
+                    Developer Skill System
+                </span> */}
             </nav>
 
         )

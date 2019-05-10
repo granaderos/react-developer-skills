@@ -37,6 +37,27 @@ nav > ul > li > a {
     border: 1px solid whitesmoke;
     margin: 20px;
 }
+
+#divLoginContainer {
+    margin-top: 170px !important;
+    height: 390px;
+    padding: 20px;
+    margin: auto;
+    text-align: center;
+}
+
+#divLoginContainer input {
+    text-align: center;
+    margin: auto;
+    width: 300px;
+}
+
+#divUserStoriesContainer {
+    padding: 40px;
+    height: 530px;
+
+}
+
 /* 
 #tableDevs thead tr th, #tableDevs tbody tr td {
     text-align: center;

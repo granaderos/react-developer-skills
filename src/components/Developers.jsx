@@ -118,7 +118,30 @@ export default class Developers extends Component {
         e.preventDefault();
         // this.formValidations();
         var devData = this.state.dev;
-        Axios.post(baseAPIURL + "/developers/add", devData, config)
+        var dateReg = /^\d{4}[./-]\d{2}[./-]\d{2}$/;
+        var nameReg = /^[a-zA-Z- ]+$/ //.test( 'John Doe');
+
+        var valid = true;
+        var mess = "";
+        if(devData.birthDate != null && devData.firstName != "" && devData.lastName != "" && devData.position != "") {
+            if(!(devData.firstName.match(nameReg) && devData.lastName.match(nameReg))) {
+                valid = false;
+                mess += "Please provide a valid name.";
+            }
+            
+            if(!devData.birthDate.match(dateReg)) {
+                valid = false;
+                mess += "\nPlease provide a valid birth date.";
+            }
+        } else {
+            valid = false;
+            mess += "\nPlease provide all the required data.";
+        }
+        if(mess != "") alert(mess);
+        
+
+        if(valid) {
+            Axios.post(baseAPIURL + "/developers/add", devData, config)
             .then(res => {
                 console.log(JSON.stringify(res));
                 alert(res.data);
@@ -126,10 +149,12 @@ export default class Developers extends Component {
                     this.setState({show: false});
                     this.getListDevelopers();
                 } else {
-                    alert("")
+                    // alert("")
+
                 }
                 
             })
+        }
     }
 
     handleChangeDevData = (e) => {
@@ -270,23 +295,23 @@ export default class Developers extends Component {
                         <Modal.Body>
                             <form id="formDeveloper" method="POST" onSubmit={this.handleAddDevFormSubmit}>
                                 <div>
-                                    <label for="firstName">First Name:</label>
+                                    <label for="firstName">First Name: <sup>*</sup></label>
                                     <input onChange={this.handleChangeDevData} type="text" className="form-control" name="firstName" id="firstName" required />
                                 </div>
                                 <div>
-                                    <label for="middleName">Middle Name:</label>
+                                    <label for="middleName">Middle Name: </label>
                                     <input onChange={this.handleChangeDevData} type="text" className="form-control" name="middleName" id="middleName" />
                                 </div>
                                 <div>
-                                    <label>Last Name:</label>
+                                    <label>Last Name: <sup>*</sup></label>
                                     <input onChange={this.handleChangeDevData} type="text" className="form-control" name="lastName" id="lastName" />
                                 </div>
                                 <div>
-                                    <label>Birth Date:</label>
-                                    <input onChange={this.handleChangeDevData} type="text" className="form-control" name="birthDate" id="birthDate" />
+                                    <label>Birth Date: <sup>*</sup></label>
+                                    <input placeholder="yyyy-mm-dd" onChange={this.handleChangeDevData} type="text" className="form-control" name="birthDate" id="birthDate" />
                                 </div>
                                 <div>
-                                    <label>Position:</label>
+                                    <label>Position: <sup>*</sup></label>
                                     <input onChange={this.handleChangeDevData} type="text" className="form-control" name="position" id="position" />
                                 </div>
                             </form>
